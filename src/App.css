@@ -1,38 +1,27 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* App container styling */
+.app-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+}
+
+.content-container {
+  flex-grow: 1;
+  overflow-y: hidden; /* Add this if you want the content to be scrollable */
+}
+span{
   color: white;
+  text-decoration: none;
 }
 
-.App-link {
-  color: #61dafb;
+/* styling for links */
+.page-link {
+  display: flex;
+  align-items: center;
+  color: #e2e8f0; /* Match the text color with other menu items */
+  text-decoration: none; /* Remove underline */
+  /* padding: 0.5rem 1rem; Add some padding */
+  transition: background-color 0.3s ease; /* Add a transition for smooth hover effect */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
