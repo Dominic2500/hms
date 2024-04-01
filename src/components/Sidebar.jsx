@@ -115,7 +115,7 @@ const SideBar = () => {
           </MenuItem>
           <MenuItem icon={<i class="fas fa-clipboard-list"></i>}>
             <Link
-            to="/dashboard"
+            to="/TriageAssessment"
             className="link page-link"
             onClick={handleActive}
           >
@@ -123,7 +123,13 @@ const SideBar = () => {
           </Link>
           </MenuItem>
           <MenuItem icon={<i class="fas fa-procedures"></i>}>
-            Inpatient Management
+            <Link
+            to="/PatientProfile"
+            className="link page-link"
+            onClick={handleActive}
+          >
+             Inpatient Management
+          </Link>
           </MenuItem>
           <MenuItem icon={<OutpatientIcon />}>Outpatient Management</MenuItem>
           <MenuItem icon={<MedicalRecordsIcon />}>

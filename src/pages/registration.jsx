@@ -3,6 +3,7 @@ import { useTable, useGlobalFilter, useSortBy, usePagination, useRowSelect } fro
 import { Container, Table, InputGroup, FormControl, Pagination } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Add } from '@mui/icons-material';
+import AddPatientModal from '../components/addPatient';
 
 const PatientRegistration = () => {
   const [data, setData] = useState([
@@ -13,6 +14,8 @@ const PatientRegistration = () => {
     { name: 'Michael Brown', phoneNumber: '555-7890', address: '159 Maple Ln', age: 39, sex: 'Male', primaryInsurance: 'JKL Insurance' },
     // Add more dummy data as needed
   ]);
+
+  const [showAddPatientModal, setShowAddPatientModal] = useState(false);
 
   const COLUMNS = [
     {
@@ -88,6 +91,27 @@ const PatientRegistration = () => {
 
   const { globalFilter, pageIndex, pageSize } = state;
 
+  const AddPatientButton = styled.button`
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  `;
+
+  const ToggleAddPatientModal = () => {
+    setShowAddPatientModal(!showAddPatientModal);
+  };
+
   return (
     <Container className="patient-registration-container">
       <h2></h2>
@@ -100,7 +124,7 @@ const PatientRegistration = () => {
             aria-label="Search"
           />
         </InputGroup>
-        <AddPatientButton variant="primary">
+        <AddPatientButton onClick={ToggleAddPatientModal}>
           <Add />
           Add Patient
         </AddPatientButton>
@@ -159,6 +183,10 @@ const PatientRegistration = () => {
         </select>
       </PaginationContainer>
       <p>Selected Rows: {Object.keys(selectedFlatRows).length}</p>
+      <AddPatientModal
+        show={showAddPatientModal}
+        onHide={() => setShowAddPatientModal(false)}
+      />
     </Container>
   );
 };
@@ -168,23 +196,6 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-`;
-
-const AddPatientButton = styled.button`
-  background-color: #007bff;
-  border: none;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    background-color: #0056b3;
-  }
 `;
 
 const PaginationContainer = styled.div`

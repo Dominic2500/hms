@@ -7,6 +7,8 @@ import NavBar from './components/Navbar';
 import Footer from './components/Footer';
 import Dashboard from './pages/dashboard';
 import Registration from './pages/registration';
+import TriageAssessment from './pages/triage';
+import PatientProfile from './pages/patientProfile';
 import SideBar from './components/Sidebar'
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               {/* registration route */}
               <Route path="/registration" element={<Registration />} />
+              {/* Triage Assessment Route */}
+              <Route path="/TriageAssessment" element={<TriageAssessment />} />
+              {/* Patient Profile Route */}
+              <Route path="/PatientProfile" element={<PatientProfile />} />
               {/* Other routes */}
             </Routes>
           </div>
