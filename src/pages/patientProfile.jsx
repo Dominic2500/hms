@@ -32,7 +32,9 @@ import {
 import Documents from "../PatientProfile/Documents";
 import VitalSignsForm from "../PatientProfile/vitalSigns";
 import BloodSugarForm from "../PatientProfile/BloodSugar"
-
+import DoctorsNotes from "../PatientProfile/DoctorsNotes";
+import BloodSugarLog from "../PatientProfile/BloodSugarLog";
+import NursingNotes from "../PatientProfile/NursingNotes";
 const PatientProfile = () => {
   const [tabValue, setTabValue] = useState(0); // State for handling tab value
   const [editMode, setEditMode] = useState(false); // State for handling edit mode
@@ -54,27 +56,7 @@ const PatientProfile = () => {
     setEditMode(!editMode);
   }; // Function to handle edit mode toggle
 
-  // Placeholder content for each tab
-  const renderTabContent = () => {
-    switch (tabValue) {
-      case 0:
-        return <Documents />;
-      case 1:
-        return <BloodSugarChart />;
-      case 2:
-        return <BloodSugarChart/>;
-      case 3:
-        return <div>Content for Medication tab</div>;
-      case 4:
-        return <div>Content for Medical History tab</div>;
-      case 5:
-        return <div>Content for Family History tab</div>;
-      case 6:
-        return <div>Content for Immunization tab</div>;
-      default:
-        return null; // or return a default content component
-    }
-  };
+ 
 
   const handleAllergyChange = (index, value) => {
     const newAllergies = [...allergies];
@@ -447,7 +429,7 @@ const PatientProfile = () => {
                     </>
                   }
                 >
-                 <BloodSugarForm/>
+                 <BloodSugarLog/>
                 </Tab>
                 <Tab
                   eventKey={3}
@@ -456,7 +438,9 @@ const PatientProfile = () => {
                       <FontAwesomeIcon icon={faPills} /> Medication
                     </>
                   }
-                ></Tab>
+                >
+                  <DoctorsNotes />
+                </Tab>
                 <Tab
                   eventKey={4}
                   title={
@@ -464,7 +448,9 @@ const PatientProfile = () => {
                       <FontAwesomeIcon icon={faFileAlt} /> Medical History
                     </>
                   }
-                ></Tab>
+                >
+                  <NursingNotes />
+                </Tab>
                 <Tab
                   eventKey={5}
                   title={

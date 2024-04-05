@@ -1,0 +1,47 @@
+.discharge-summary-container {
+  margin: auto;
+  width: 70%;
+}
+
+.discharge-summary-title {
+  margin-bottom: 20px;
+}
+
+.additional-details {
+  margin-bottom: 20px;
+}
+
+.address-block {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.address-line {
+  margin-bottom: 5px;
+}
+
+.label {
+  font-weight: bold;
+  color: #333;
+}
+
+.value {
+  color: #555;
+}
+
+.discharge-summary-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+}
+
+.submit-btn {
+  float: right;
+}
