@@ -9,7 +9,13 @@ import Dashboard from './pages/dashboard';
 import Registration from './pages/registration';
 import TriageAssessment from './pages/triage';
 import PatientProfile from './pages/patientProfile';
-import SideBar from './components/Sidebar'
+import TeleMedicine from './pages/Telemedicine';
+import ImagingDashboard from './pages/imaging'
+import LaboratoryManagement from './pages/laboratory'
+import UserManagement from './pages/UserManagement';
+import Pharmacy from './pages/pharmacy';
+import Procurement from './pages/Procurement';
+import SideBar from './components/Sidebar';
 function App() {
   return (
     <>
@@ -30,6 +36,18 @@ function App() {
               <Route path="/TriageAssessment" element={<TriageAssessment />} />
               {/* Patient Profile Route */}
               <Route path="/PatientProfile" element={<PatientProfile />} />
+              {/* imaging dashboard */}
+              <Route path='/ImagingDashboard' element={<ImagingDashboard/>}/>
+              {/* Laboratory route */}
+              <Route path='/Laboratory' element={<LaboratoryManagement/>}/>
+              {/* Telemedicine Route */}
+              <Route path="/TeleMedicine" element={<TeleMedicine />} />
+              {/* User Management Route */}
+              <Route path="/UserManagement" element={<UserManagement/>}/>
+              {/* Pharmacy Route */}
+              <Route path="/Pharmacy" element={<Pharmacy/>}/>
+              {/* Procurement Route */}
+              <Route path="/Procurement" element={<Procurement/>}/>
               {/* Other routes */}
             </Routes>
           </div>

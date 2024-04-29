@@ -6,8 +6,7 @@ import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
 import firebaseConfig from "../pages/configs";
 import ReusableTable from "./ReusableTable";
 import AddPatientModal from "../components/addPatient";
-import { Add, CalendarToday, Check } from "@mui/icons-material";
-import * as Yup from "yup";
+import { Add } from "@mui/icons-material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DropdownButton, Dropdown, Button } from "react-bootstrap";
@@ -15,13 +14,6 @@ import { DropdownButton, Dropdown, Button } from "react-bootstrap";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const handleBooking = (patient) => {
-  console.log("Booking patient:", patient);
-};
-
-const handleDirectCheckIn = (patient) => {
-  console.log("Checking in patient:", patient);
-};
 
 const openSesion = () => {
   // open a modal  with name of patient and other details
@@ -68,7 +60,7 @@ const HeaderContainer = styled.div`
 `;
 
 
-const PatientRegistration = () => {
+const Prescriptions = () => {
   const [data, setData] = useState([]);
   const [showAddPatientModal, setShowAddPatientModal] = useState(false);
 
@@ -101,11 +93,11 @@ const PatientRegistration = () => {
       accessor: (row) => `${row.personalInfo.firstName || ''} ${row.personalInfo.middleName || ''} ${row.personalInfo.lastName || ''}`,
     },
     {
-      Header: "Phone Number",
+      Header: " Medication",
       accessor: (row) => row.personalInfo.phoneNumber || '',
     },
     {
-      Header: "Insurance Type",
+      Header: "dosage",
       accessor: (row) => row.personalInfo.insuranceType || '',
     },
     {
@@ -148,8 +140,8 @@ const PatientRegistration = () => {
   };
 
   return (
-    <Container className="patient-registration-container">
-      <h2>Patient Registration</h2>
+    <Container className="patient-registration-container" style={{marginTop:'5px'}}>
+      {/* <h2>Patient Registration</h2> */}
       <HeaderContainer>
         <AddPatientButton onClick={ToggleAddPatientModal}>
           <Add />
@@ -187,5 +179,5 @@ const PatientRegistration = () => {
 };
 
 
-export default PatientRegistration;
+export default Prescriptions;
 

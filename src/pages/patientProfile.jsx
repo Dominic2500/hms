@@ -35,6 +35,8 @@ import BloodSugarForm from "../PatientProfile/BloodSugar"
 import DoctorsNotes from "../PatientProfile/DoctorsNotes";
 import BloodSugarLog from "../PatientProfile/BloodSugarLog";
 import NursingNotes from "../PatientProfile/NursingNotes";
+import ImagingDashboard from "./imaging"
+import LaboratoryManagement from "./laboratory"
 const PatientProfile = () => {
   const [tabValue, setTabValue] = useState(0); // State for handling tab value
   const [editMode, setEditMode] = useState(false); // State for handling edit mode
@@ -419,7 +421,7 @@ const PatientProfile = () => {
                     </>
                   }
                 >
-                  <VitalSignsForm />
+                  <LaboratoryManagement />
                 </Tab>
                 <Tab
                   eventKey={2}
@@ -429,7 +431,7 @@ const PatientProfile = () => {
                     </>
                   }
                 >
-                 <BloodSugarLog/>
+                 <ImagingDashboard/>
                 </Tab>
                 <Tab
                   eventKey={3}

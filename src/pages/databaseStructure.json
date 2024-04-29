@@ -1,0 +1,334 @@
+{
+  "personalInfo": {
+    "nationalId": "55",
+    "dateOfBirth": "2024-04-07",
+    "primaryAddress": "afghanistan",
+    "policyNumber": "",
+    "governmentIssuedId": "54",
+    "preferredContact": "phone",
+    "secondaryPhoneNumber": "54",
+    "lastName": "nae",
+    "middleName": "ajun",
+    "insuranceType": "government",
+    "gender": "female",
+    "memberNumber": "45",
+    "firstName": "anfa",
+    "insuranceProvider": "",
+    "phoneNumber": "54"
+  },
+  "hospitalVisits": [
+    {
+      "hospitalId": "123456",
+      "hospitalName": "ABC Hospital",
+      "hospitalPhoneNumber": "123-456-7890",
+      "visits": [
+        {
+          "visitId": "visit001",
+          "visitDate": "2023-08-15T10:30:00Z",
+          "vitalSigns": {
+            "allergies": [],
+            "temperature": 98.6,
+            "bloodPressure": {
+              "systolic": 120,
+              "diastolic": 80
+            },
+            "heartRate": 72,
+            "bloodType": "A+",
+            "weight": 75,
+            "painLevel": 3,
+            "oxygenSaturation": 98,
+            "respirationRate": 16
+          },
+          "bloodSugarLog": [
+            {
+              "date": "2023-08-15",
+              "dayOfWeek": "Monday",
+              "breakfast": {
+                "pre": {
+                  "bloodSugar": 120,
+                  "time": "08:00",
+                  "meds": ["Metformin"],
+                  "carbs": 30
+                },
+                "post": {
+                  "bloodSugar": 140,
+                  "time": "10:00",
+                  "meds": [],
+                  "carbs": 0
+                }
+              },
+              "lunch": {
+                "pre": {
+                  "bloodSugar": 180,
+                  "time": "12:30",
+                  "meds": ["Insulin"],
+                  "carbs": 45
+                },
+                "post": {
+                  "bloodSugar": 120,
+                  "time": "14:30",
+                  "meds": [],
+                  "carbs": 0
+                }
+              },
+              "dinner": {
+                "pre": {
+                  "bloodSugar": 160,
+                  "time": "18:00",
+                  "meds": ["Metformin"],
+                  "carbs": 60
+                },
+                "post": {
+                  "bloodSugar": 130,
+                  "time": "20:00",
+                  "meds": [],
+                  "carbs": 0
+                }
+              }
+            }
+          ],
+          "doctorsNotes": [
+            {
+              "presentingSymptoms": ["Fatigue", "Increased thirst"],
+              "allergies": [],
+              "currentMedications": [
+                {
+                  "medication": "Metformin",
+                  "dosage": "500mg",
+                  "frequency": "Twice a day",
+                  "treatment": "Type 2 Diabetes"
+                }
+              ],
+              "primaryDiagnosis": "Type 2 Diabetes",
+              "secondaryDiagnosis": null,
+              "treatmentPlan": {
+                "immediateActions": [
+                  "Start insulin therapy",
+                  "Adjust Metformin dosage"
+                ],
+                "longTermStrategy": [
+                  "Dietary changes",
+                  "Regular exercise",
+                  "Blood sugar monitoring"
+                ]
+              },
+              "medications": [
+                {
+                  "medication": "Insulin",
+                  "dosage": "10 units",
+                  "frequency": "Once a day",
+                  "instructions": "Inject subcutaneously before breakfast"
+                },
+                {
+                  "medication": "Metformin",
+                  "dosage": "1000mg",
+                  "frequency": "Twice a day",
+                  "instructions": "Take with meals"
+                }
+              ],
+              "notes": [
+                "Patient is overweight, BMI: 28.5",
+                "Recommend regular exercise and dietary changes"
+              ],
+              "followUpObservations": [
+                {
+                  "date": "2023-08-22",
+                  "time": "14:00",
+                  "observations": [
+                    "Blood sugar levels have improved",
+                    "Patient reports feeling more energetic"
+                  ]
+                }
+              ]
+            }
+          ],
+          "nursingNotes": [
+            {
+              "date": "2023-08-15",
+              "time": "11:00",
+              "nurseName": "Jane Doe",
+              "notes": "Patient admitted for diabetes management",
+              "updatedBy": null,
+              "updateTime": null,
+              "updateDate": null
+            },
+            {
+              "date": "2023-08-15",
+              "time": "18:30",
+              "nurseName": "John Smith",
+              "notes": "Insulin administered as per doctor's orders",
+              "updatedBy": null,
+              "updateTime": null,
+              "updateDate": null
+            }
+          ],
+          "dischargeSummary": {
+            "dischargeStatus": "Discharged",
+            "daysStayed": 3,
+            "bedNumber": "A102",
+            "admissionReason": "Diabetes management",
+            "medication": [
+              {
+                "medication": "Insulin",
+                "dosage": "10 units",
+                "frequency": "Once a day",
+                "instructions": "Inject subcutaneously before breakfast"
+              },
+              {
+                "medication": "Metformin",
+                "dosage": "1000mg",
+                "frequency": "Twice a day",
+                "instructions": "Take with meals"
+              }
+            ],
+            "followUpCare": [
+              "Schedule follow-up appointment with endocrinologist",
+              "Continue blood sugar monitoring and insulin therapy"
+            ],
+            "patientInstructions": [
+              "Follow dietary recommendations",
+              "Engage in regular exercise",
+              "Monitor blood sugar levels"
+            ]
+          },
+          "fluidChart": [
+            {
+              "date": "2023-08-15",
+              "entries": [
+                {
+                  "time": "08:00",
+                  "intake": {
+                    "type": "Oral",
+                    "amount": 240,
+                    "detail": "Water"
+                  },
+                  "output": null,
+                  "totalIntake": 240,
+                  "totalOutput": 0,
+                  "balance": 240,
+                  "nurseInitials": "JD"
+                },
+                {
+                  "time": "12:00",
+                  "intake": {
+                    "type": "IV",
+                    "amount": 500,
+                    "detail": "Normal Saline"
+                  },
+                  "output": {
+                    "type": "Urine",
+                    "amount": 300
+                  },
+                  "totalIntake": 740,
+                  "totalOutput": 300,
+                  "balance": 440,
+                  "nurseInitials": "JS"
+                }
+              ]
+            }
+          ],
+          "admissionNotes": {
+            "admissionDate": "2023-08-15",
+            "admissionTime": "10:00",
+            "reasonForAdmission": "Diabetes management",
+            "admittingPhysician": "Dr. Jane Smith",
+            "primaryComplaint": "Fatigue, increased thirst, and frequent urination",
+            "historyOfPresentIllness": "Patient has been experiencing symptoms for the past 2 months...",
+            "pastMedicalHistory": "No significant medical history",
+            "familyHistory": "Mother has type 2 diabetes",
+            "socialHistory": "Non-smoker, occasional alcohol consumption",
+            "medicationList": [
+              {
+                "medication": "Metformin",
+                "dosage": "500mg",
+                "frequency": "Twice a day",
+                "treatment": "Type 2 Diabetes"
+              }
+            ],
+            "allergies": [],
+            "vitalSigns": {
+              "temperature": 98.6,
+              "bloodPressure": {
+                "systolic": 140,
+                "diastolic": 90
+              },
+              "heartRate": 78,
+              "respiratoryRate": 16,
+              "oxygenSaturation": 97
+            },
+            "physicalExaminationFindings": "Overweight, BMI: 28.5, no other significant findings",
+            "initialAssessment": "Type 2 Diabetes Mellitus, uncontrolled",
+            "initialPlan": "Admit for diabetes management, start insulin therapy, adjust Metformin dosage"
+          },
+          "prenatalChart": null,
+          "postnatalChart": null,
+          "imaging": [
+            {
+              "patientName": "Anfa Nae Ajun",
+              "imagingType": "X-Ray",
+              "bodyPart": "Chest",
+              "date": "2023-08-16",
+              "time": "14:00",
+              "orderingPhysician": "Dr. Jane Smith",
+              "reasonForImaging": "Rule out pneumonia",
+              "imagingFindings": "No abnormalities detected",
+              "radiologistInterpretation": "Normal chest X-ray",
+              "notes": null
+            }
+          ],
+          "labResults": [
+            {
+              "patientName": "Anfa Nae Ajun",
+              "testName": "HbA1c",
+              "date": "2023-08-15",
+              "time": "11:00",
+              "specimenType": "Blood",
+              "resultValue": 8.5,
+              "referenceRange": "4.0 - 6.0",
+              "abnormalFlag": true,
+              "orderingPhysician": "Dr. Jane Smith",
+              "notes": "Indicates poor glucose control over the past 2-3 months"
+            }
+          ],
+          "immunizations": []
+        }
+      ]
+    },
+    {
+      "hospitalId": "789012",
+      "hospitalName": "XYZ Hospital",
+      "hospitalPhoneNumber": "987-654-3210",
+      "visits": [
+        {
+          "visitId": "visit002",
+          "visitDate": "2023-10-01T14:30:00Z",
+          "vitalSigns": {
+            "allergies": [],
+            "temperature": 99.2,
+            "bloodPressure": {
+              "systolic": 135,
+              "diastolic": 85
+            },
+            "heartRate": 78,
+            "bloodType": "A+",
+            "weight": 74,
+            "painLevel": 5,
+            "oxygenSaturation": 96,
+            "respirationRate": 18
+          },
+          "bloodSugarLog": [...],
+          "doctorsNotes": [...],
+          "nursingNotes": [...],
+          "dischargeSummary": {...},
+          "fluidChart": [...],
+          "admissionNotes": {...},
+          "prenatalChart": null,
+          "postnatalChart": null,
+          "imaging": [...],
+          "labResults": [...],
+          "immunizations": [...]
+        }
+      ]
+    }
+  ]
+}

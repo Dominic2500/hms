@@ -1,67 +1,157 @@
-import React, { useState } from 'react';
-import { Modal, Form, Button, Col, Row } from 'react-bootstrap';
-import * as Yup from 'yup';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { getFirestore, collection, addDoc, doc, setDoc } from 'firebase/firestore';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Modal, Form, Button, Col, Row } from "react-bootstrap";
+import * as Yup from "yup";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+} from "firebase/firestore";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../pages/configs"; // Import your Firebase configuration
+
+const app = initializeApp(firebaseConfig); // Initialize Firebase app
+const db = getFirestore(app); // Get Firestore instance
+
+const StyledModal = styled(Modal)`
+  .modal-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  .modal-header .close {
+    color: #fff;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+`;
+
+const StyledModalHeader = styled(Modal.Header)`
+  background-color: #007bff;
+  color: #fff;
+  padding: 1rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+`;
+
+const StyledModalTitle = styled(Modal.Title)`
+  font-weight: bold;
+  font-size: 1.25rem;
+`;
+
+const StyledButtonRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+`;
+
+const StyledSubmitButton = styled(Button)`
+  width: 200px;
+`;
+
+const StyledBackButton = styled(Button)`
+  width: 100px;
+`;
 
 const AddPatientModal = ({ show, onHide }) => {
   const [formStep, setFormStep] = useState(1);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    dateOfBirth: '',
-    gender: '',
-    preferredContact: '',
-    primaryAddress: '',
-    phoneNumber: '',
-    secondaryPhoneNumber: '',
-    governmentIssuedId: '',
-    insuranceType: '',
-    insuranceProvider: '',
-    policyNumber: '',
-    memberNumber: '',
-    nationalId: '',
-  });
+  const initialFormData = {
+    personalInfo: {
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      dateOfBirth: "",
+      gender: "",
+      preferredContact: "",
+      primaryAddress: "",
+      phoneNumber: "",
+      secondaryPhoneNumber: "",
+      governmentIssuedId: "",
+    },
+    insuranceType: "",
+    insuranceProvider: "",
+    policyNumber: "",
+    memberNumber: "",
+    nationalId: "",
+    hospitalVisits: {},
+  };
+  const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
 
   const validationSchemaStep1 = Yup.object().shape({
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    dateOfBirth: Yup.date().required('Date of birth is required'),
-    gender: Yup.string().required('Gender is required'),
-    preferredContact: Yup.string().required('Preferred contact is required'),
-    primaryAddress: Yup.string().required('Primary address is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    governmentIssuedId: Yup.string().required('Government-issued ID is required'),
+    firstName: Yup.string().required("First name is required"),
+    lastName: Yup.string().required("Last name is required"),
+    dateOfBirth: Yup.date().required("Date of birth is required"),
+    gender: Yup.string().required("Gender is required"),
+    preferredContact: Yup.string().required("Preferred contact is required"),
+    primaryAddress: Yup.string().required("Primary address is required"),
+    phoneNumber: Yup.string().required("Phone number is required"),
+    governmentIssuedId: Yup.string().required(
+      "Government-issued ID is required"
+    ),
   });
 
   const validationSchemaStep2 = Yup.object().shape({
-    insuranceType: Yup.string().required('Insurance type is required'),
-    insuranceProvider: Yup.string().when('insuranceType', {
-      is: (insuranceType) => insuranceType !== 'government',
-      then: Yup.string().required('Insurance provider is required'),
-    }),
-    policyNumber: Yup.string().when('insuranceType', {
-      is: (insuranceType) => insuranceType !== 'government',
-      then: Yup.string().required('Policy number is required'),
-    }),
-    memberNumber: Yup.string().when('insuranceType', {
-      is: (insuranceType) => insuranceType === 'government',
-      then: Yup.string().required('Member number is required'),
-    }),
-    nationalId: Yup.string().when('insuranceType', {
-      is: (insuranceType) => insuranceType === 'government',
-      then: Yup.string().required('National ID is required'),
-    }),
+    insuranceType: Yup.string().required("Insurance type is required"),
+    insuranceProvider: Yup.string().test(
+      "insuranceProvider",
+      "Insurance provider is required",
+      (value, context) =>
+        context.parent.insuranceType !== "government" ? !!value : true
+    ),
+    policyNumber: Yup.string().test(
+      "policyNumber",
+      "Policy number is required",
+      (value, context) =>
+        context.parent.insuranceType !== "government" ? !!value : true
+    ),
+    memberNumber: Yup.string().test(
+      "memberNumber",
+      "Member number is required",
+      (value, context) =>
+        context.parent.insuranceType === "government" ? !!value : true
+    ),
+    nationalId: Yup.string().test(
+      "nationalId",
+      "National ID is required",
+      (value, context) =>
+        context.parent.insuranceType === "government" ? !!value : true
+    ),
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (
+      name === "insuranceType" ||
+      name === "insuranceProvider" ||
+      name === "policyNumber" ||
+      name === "memberNumber" ||
+      name === "nationalId"
+    ) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        personalInfo: {
+          ...prevData.personalInfo,
+          [name]: value,
+        },
+      }));
+    }
   };
 
   const validateForm = async () => {
@@ -73,9 +163,26 @@ const AddPatientModal = ({ show, onHide }) => {
       }
       return true;
     } catch (errors) {
-      const firstErrorMessage = errors.inner[0].message;
-      toast.error(`Please fix the following error: ${firstErrorMessage}`);
+      if (errors.inner && errors.inner.length > 0) {
+        const firstErrorMessage = errors.inner[0].message;
+        toast.error(`Please fix the following error: ${firstErrorMessage}`);
+      } else {
+        console.error("Validation error:", errors);
+        toast.error(
+          "An unknown validation error occurred. Please check the form data."
+        );
+      }
       return false;
+    }
+  };
+
+  const updatePatientData = async (patientId, data) => {
+    try {
+      const patientDocRef = doc(db, "patients", patientId);
+      await setDoc(patientDocRef, data, { merge: true });
+      console.log("Patient document updated successfully");
+    } catch (error) {
+      console.error("Error updating patient document:", error);
     }
   };
 
@@ -91,41 +198,47 @@ const AddPatientModal = ({ show, onHide }) => {
 
     try {
       await saveToFirestore(formData);
-      toast.success('Patient added successfully!');
+      toast.success("Patient added successfully!");
       resetForm();
     } catch (error) {
-      console.error('Error during form submission:', error);
-      toast.error('Error during form submission. Please try again.');
+      console.error("Error during form submission:", error);
+      toast.error("Error during form submission. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const resetForm = () => {
-    setFormData({
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      dateOfBirth: '',
-      gender: '',
-      preferredContact: '',
-      primaryAddress: '',
-      phoneNumber: '',
-      secondaryPhoneNumber: '',
-      governmentIssuedId: '',
-      insuranceType: '',
-      insuranceProvider: '',
-      policyNumber: '',
-      memberNumber: '',
-      nationalId: '',
-    });
+    setFormData(initialFormData);
     setFormStep(1);
   };
 
   const saveToFirestore = async (data) => {
-    // ... (implementation omitted for brevity)
+    try {
+      const patientsCollection = collection(db, "patients");
+      const newPatientRef = doc(patientsCollection);
+      const newPatientId = newPatientRef.id;
+  
+      const patientData = {
+        [newPatientId]: {
+          personalInfo: {
+            ...data.personalInfo,
+            insuranceType: data.insuranceType,
+            insuranceProvider: data.insuranceProvider,
+            policyNumber: data.policyNumber,
+            memberNumber: data.memberNumber, 
+            nationalId: data.nationalId, 
+          },
+          hospitalVisits: {},
+        },
+      };
+  
+      await setDoc(newPatientRef, patientData);
+      console.log("Patient document written with ID: ", newPatientId);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
-
   const renderFormStep = () => {
     if (formStep === 1) {
       return (
@@ -258,11 +371,13 @@ const AddPatientModal = ({ show, onHide }) => {
             >
               <option value="">Select Insurance Type</option>
               <option value="private">Private Insurance</option>
-              <option value="government">Government Insurance (NHIF - Kenya)</option>
+              <option value="government">
+                Government Insurance (NHIF - Kenya)
+              </option>
             </Form.Control>
           </Form.Group>
 
-          {formData.insuranceType === 'private' && (
+          {formData.insuranceType === "private" && (
             <>
               <Form.Group controlId="insuranceProvider">
                 <Form.Label>Insurance Provider</Form.Label>
@@ -287,7 +402,7 @@ const AddPatientModal = ({ show, onHide }) => {
             </>
           )}
 
-          {formData.insuranceType === 'government' && (
+          {formData.insuranceType === "government" && (
             <>
               <Form.Group controlId="memberNumber">
                 <Form.Label>NHIF Member Number</Form.Label>
@@ -320,7 +435,7 @@ const AddPatientModal = ({ show, onHide }) => {
     <StyledModal show={show} onHide={onHide} centered>
       <StyledModalHeader closeButton>
         <StyledModalTitle>
-          {formStep === 1 ? 'Add Patient (Step 1)' : 'Add Patient (Step 2)'}
+          {formStep === 1 ? "Add Patient (Step 1)" : "Add Patient (Step 2)"}
         </StyledModalTitle>
       </StyledModalHeader>
       <Modal.Body>
@@ -352,7 +467,7 @@ const AddPatientModal = ({ show, onHide }) => {
                 type="submit"
                 disabled={loading}
               >
-                {loading ? 'Submitting...' : 'Submit'}
+                {loading ? "Submitting..." : "Submit"}
               </StyledSubmitButton>
             )}
           </StyledButtonRow>
@@ -362,51 +477,6 @@ const AddPatientModal = ({ show, onHide }) => {
   );
 };
 
-const StyledModal = styled(Modal)`
-  .modal-header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 1rem;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-  }
 
-  .modal-header .close {
-    color: #fff;
-    opacity: 0.8;
-    transition: opacity 0.3s;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-`;
-
-const StyledModalHeader = styled(Modal.Header)`
-  background-color: #007bff;
-  color: #fff;
-  padding: 1rem;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-`;
-
-const StyledModalTitle = styled(Modal.Title)`
-  font-weight: bold;
-  font-size: 1.25rem;
-`;
-
-const StyledButtonRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-`;
-
-const StyledSubmitButton = styled(Button)`
-  width: 200px;
-`;
-
-const StyledBackButton = styled(Button)`
-  width: 100px;
-`;
 
 export default AddPatientModal;
