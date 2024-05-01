@@ -19,8 +19,6 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "ag-grid-community": "^31.2.1",
-    "ag-grid-react": "^31.2.1",
     "bootstrap": "^5.3.3",
     "firebase": "^10.11.0",
     "formik": "^2.4.5",
@@ -36,7 +34,6 @@
     "react-toastify": "^10.0.5",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4",
-    "xlsx": "^0.18.5",
     "yup": "^1.4.0"
   },
   "scripts": {

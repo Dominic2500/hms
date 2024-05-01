@@ -15,6 +15,8 @@ import LaboratoryManagement from './pages/laboratory'
 import UserManagement from './pages/UserManagement';
 import Pharmacy from './pages/pharmacy';
 import Procurement from './pages/Procurement';
+import InpatientManagement from './pages/inpatientManagement'
+import FinancialManagement from './pages/FinancialManagement'
 import SideBar from './components/Sidebar';
 function App() {
   return (
@@ -48,6 +50,10 @@ function App() {
               <Route path="/Pharmacy" element={<Pharmacy/>}/>
               {/* Procurement Route */}
               <Route path="/Procurement" element={<Procurement/>}/>
+              {/* Inpatient management Route */}
+              <Route path='/InpatientManagement' element={<InpatientManagement/>}/>
+              {/* FinancialManagement */}
+              <Route path='./FinancialManagement' element={<FinancialManagement/>}/>
               {/* Other routes */}
             </Routes>
           </div>

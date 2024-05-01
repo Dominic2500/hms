@@ -15,7 +15,7 @@ const wards = [
   // Add more ward data as needed
 ];
 
-const InpatientComponent = () => {
+const InpatientManagement = () => {
   const [initialState, setInitialState] = useState({
     pageIndex: 0,
     pageSize: 5,
@@ -155,4 +155,4 @@ const InpatientComponent = () => {
   );
 };
 
-export default InpatientComponent;
+export default InpatientManagement;

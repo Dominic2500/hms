@@ -192,7 +192,7 @@ const SideBar = () => {
         </MenuItem>
         <MenuItem
           component={
-            <Link to="/inpatient" onClick={handleActive}>
+            <Link to="/InpatientManagement" onClick={handleActive}>
               Inpatient Management
             </Link>
           }
@@ -276,13 +276,13 @@ const SideBar = () => {
         >
           <MenuItem
             component={
-              <Link to="/billing-insurance" onClick={handleActive}>
-                Billing & Insurance
+              <Link to="/FinancialManagement" onClick={handleActive}>
+                Budgeting
               </Link>
             }
             icon={<i className="fas fa-file-invoice-dollar"></i>}
           >
-            Billing & Insurance
+            Budgeting
           </MenuItem>
           <MenuItem
             component={
